@@ -1,0 +1,17 @@
+workflows:
+  ios-project-debug:
+    name: iOS debug 
+    environment:
+      xcode: latest
+      cocoapods: default
+      vars:
+          XCODE_PROJECT: "GameCatalog/GameCatalog.xcodeproj"
+          XCODE_SCHEME: "GameCatalog" 
+    scripts:    
+      - name: Build debug app
+        script: |
+          xcodebuild build -project "$XCODE_PROJECT" \
+          -scheme "$XCODE_SCHEME" \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO          
+    artifacts:
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
